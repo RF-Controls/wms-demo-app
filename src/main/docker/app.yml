@@ -1,0 +1,26 @@
+version: '2'
+services:
+  wmsdemo-app:
+    image: wmsdemo
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://wmsdemo-postgresql:5432/wmsdemo
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - SPRING_DATA_JEST_URI=http://wmsdemo-elasticsearch:9200
+      - SPRING_ELASTICSEARCH_REST_URIS=http://wmsdemo-elasticsearch:9200
+      - wms_rfcos_host=172.17.0.1 #On windows use host.docker.internal
+      - wms_rfcos_port=8888
+      - wms_rfcos_user=admin
+      - wms_rfcos_pass=admin
+    ports:
+      - 8080:8080
+  wmsdemo-postgresql:
+    extends:
+      file: postgresql.yml
+      service: wmsdemo-postgresql
+  wmsdemo-elasticsearch:
+    extends:
+      file: elasticsearch.yml
+      service: wmsdemo-elasticsearch

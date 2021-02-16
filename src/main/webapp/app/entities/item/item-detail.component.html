@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div *ngIf="item">
+            <div class="row">
+                <div class="col-8">
+                    <h2><span jhiTranslate="wmsdemoApp.item.detail.title">Item</span> {{ item.id }}</h2>
+                </div>
+            </div>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <dt><span>Image</span></dt>
+                    <dd>
+                        <div *ngIf="item.detailImage">
+                            <a (click)="openFile(item.detailImageContentType, item.detailImage)">
+                                <img [src]="'data:' + item.detailImageContentType + ';base64,' + item.detailImage"
+                                     style="max-width: 100%;" alt="item image"/>
+                            </a>
+                            {{ item.detailImageContentType }}, {{ byteSize(item.detailImage) }}
+                        </div>
+                    </dd>
+                </div>
+
+                <div class="col-md-8">
+                    <dl class="row-md jh-entity-details">
+                        <dt><span jhiTranslate="wmsdemoApp.item.name">Name</span></dt>
+                        <dd>
+                            <span>{{ item.name }}</span>
+                        </dd>
+                        <dt><span jhiTranslate="wmsdemoApp.item.epc">Epc</span></dt>
+                        <dd>
+                            <span>{{ item.epc }}</span>
+                        </dd>
+                        <dt><span jhiTranslate="wmsdemoApp.item.description">Description</span></dt>
+                        <dd>
+                            <span>{{ item.description }}</span>
+                        </dd>
+                        <dt><span jhiTranslate="wmsdemoApp.item.description2">Description 2</span></dt>
+                        <dd>
+                            <span>{{ item.description2 }}</span>
+                        </dd>
+                        <dt><span jhiTranslate="wmsdemoApp.item.weight">Weight</span></dt>
+                        <dd>
+                            <span>{{ item.weight }}</span>
+                        </dd>
+
+                    </dl>
+
+                    <button type="submit"
+                            (click)="previousState()"
+                            class="btn btn-info">
+                        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                    </button>
+
+                    <button type="button"
+                            [routerLink]="['/item', item.id, 'edit']"
+                            class="btn btn-primary">
+                        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

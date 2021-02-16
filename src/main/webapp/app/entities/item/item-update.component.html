@@ -1,0 +1,131 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-8">
+                <h2 id="jhi-item-heading" jhiTranslate="wmsdemoApp.item.home.createOrEditLabel">Create or edit a
+                    Item</h2>
+            </div>
+        </div>
+
+
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <jhi-alert-error></jhi-alert-error>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_detailImage">Image</label>
+                        <div>
+                            <img
+                                [src]="'data:' + editForm.get('detailImageContentType')!.value + ';base64,' + editForm.get('detailImage')!.value"
+                                style="max-height: 100px;" *ngIf="editForm.get('detailImage')!.value"
+                                alt="item image"/>
+                            <div *ngIf="editForm.get('detailImage')!.value" class="form-text text-danger clearfix">
+                                <span class="pull-left">{{ editForm.get('detailImageContentType')!.value }}
+                                    , {{ byteSize(editForm.get('detailImage')!.value) }}</span>
+                                <button type="button"
+                                        (click)="clearInputImage('detailImage', 'detailImageContentType', 'file_detailImage')"
+                                        class="btn btn-secondary btn-xs pull-right">
+                                    <fa-icon icon="times"></fa-icon>
+                                </button>
+                            </div>
+                            <input type="file" id="file_detailImage"
+                                   (change)="setFileData($event, 'detailImage', true)"
+                                   accept="image/*" jhiTranslate="entity.action.addimage"/>
+                        </div>
+                        <input type="hidden" class="form-control" name="detailImage" id="field_detailImage"
+                               formControlName="detailImage"/>
+                        <input type="hidden" class="form-control" name="detailImageContentType"
+                               id="field_detailImageContentType"
+                               formControlName="detailImageContentType"/>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                        <label for="id" jhiTranslate="global.field.id">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="wmsdemoApp.item.name"
+                               for="field_name">Name</label>
+                        <input type="text" class="form-control" name="name" id="field_name"
+                               formControlName="name"/>
+                        <div
+                            *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('name')?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="wmsdemoApp.item.epc"
+                               for="field_epc">Epc</label>
+                        <input type="text" class="form-control" name="epc" id="field_epc" formControlName="epc"
+                               aria-describedby="epcHelp"/>
+                        <small id="epcHelp" class="form-text text-muted">You can type in the epc here or select an
+                            epc
+                            in the association zone list below.</small>
+                        <div
+                            *ngIf="editForm.get('epc')!.invalid && (editForm.get('epc')!.dirty || editForm.get('epc')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('epc')?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_epc_select">Epc in association zone</label>
+                        <select #select class="form-control" id="field_epc_select" name="field_epc_select"
+                                formControlName="field_epc_select" (change)="setAssociationEpc(select.value)">
+                            <option [value]="epc" *ngFor="let epc of epcsInZone">{{ epc }}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="wmsdemoApp.item.description"
+                               for="field_description">Description</label>
+                        <input type="text" class="form-control" name="description" id="field_description"
+                               formControlName="description"/>
+                        <div
+                            *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('description')?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="wmsdemoApp.item.description2"
+                               for="field_description2">Description 2</label>
+                        <input type="text" class="form-control" name="description2" id="field_description2"
+                               formControlName="description2"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="wmsdemoApp.item.weight" for="field_weight">Weight</label>
+                        <input type="number" class="form-control" name="weight" id="field_weight"
+                               formControlName="weight"/>
+                    </div>
+                    <div>
+                        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+
+                        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                                class="btn btn-primary">
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

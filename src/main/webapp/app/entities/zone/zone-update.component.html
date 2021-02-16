@@ -1,0 +1,158 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-zone-heading" jhiTranslate="wmsdemoApp.zone.home.createOrEditLabel">Create or edit a Zone</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.zone.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.zone.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.zone.maxItems" for="field_maxItems">Max Items</label>
+                    <input type="number" class="form-control" name="maxItems" id="field_maxItems"
+                           formControlName="maxItems"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.zone.x1" for="field_x1">X 1</label>
+                    <input type="number" class="form-control" name="x1" id="field_x1"
+                           formControlName="x1"/>
+                    <div *ngIf="editForm.get('x1')!.invalid && (editForm.get('x1')!.dirty || editForm.get('x1')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('x1')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('x1')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.zone.y1" for="field_y1">Y 1</label>
+                    <input type="number" class="form-control" name="y1" id="field_y1"
+                           formControlName="y1"/>
+                    <div *ngIf="editForm.get('y1')!.invalid && (editForm.get('y1')!.dirty || editForm.get('y1')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('y1')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('y1')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.zone.z1" for="field_z1">Z 1</label>
+                    <input type="number" class="form-control" name="z1" id="field_z1"
+                           formControlName="z1"/>
+                    <div *ngIf="editForm.get('z1')!.invalid && (editForm.get('z1')!.dirty || editForm.get('z1')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('z1')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('z1')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.zone.x2" for="field_x2">X 2</label>
+                    <input type="number" class="form-control" name="x2" id="field_x2"
+                           formControlName="x2"/>
+                    <div *ngIf="editForm.get('x2')!.invalid && (editForm.get('x2')!.dirty || editForm.get('x2')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('x2')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('x2')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.zone.y2" for="field_y2">Y 2</label>
+                    <input type="number" class="form-control" name="y2" id="field_y2"
+                           formControlName="y2"/>
+                    <div *ngIf="editForm.get('y2')!.invalid && (editForm.get('y2')!.dirty || editForm.get('y2')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('y2')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('y2')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.zone.z2" for="field_z2">Z 2</label>
+                    <input type="number" class="form-control" name="z2" id="field_z2"
+                           formControlName="z2"/>
+                    <div *ngIf="editForm.get('z2')!.invalid && (editForm.get('z2')!.dirty || editForm.get('z2')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('z2')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('z2')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.zone.associationZone" for="field_associationZone">Association Zone</label>
+                    <input type="checkbox" class="form-control" name="associationZone" id="field_associationZone"
+                           formControlName="associationZone"/>
+                    <div *ngIf="editForm.get('associationZone')!.invalid && (editForm.get('associationZone')!.dirty || editForm.get('associationZone')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('associationZone')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

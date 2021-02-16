@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="zone">
+            <h2><span jhiTranslate="wmsdemoApp.zone.detail.title">Zone</span> {{ zone.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="wmsdemoApp.zone.name">Name</span></dt>
+                <dd>
+                    <span>{{ zone.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="wmsdemoApp.zone.description">Description</span></dt>
+                <dd>
+                    <span>{{ zone.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="wmsdemoApp.zone.maxItems">Max Items</span></dt>
+                <dd>
+                    <span>{{ zone.maxItems }}</span>
+                </dd>
+                <dt><span jhiTranslate="wmsdemoApp.zone.x1">X 1</span></dt>
+                <dd>
+                    <span>{{ zone.x1 }}</span>
+                </dd>
+                <dt><span jhiTranslate="wmsdemoApp.zone.y1">Y 1</span></dt>
+                <dd>
+                    <span>{{ zone.y1 }}</span>
+                </dd>
+                <dt><span jhiTranslate="wmsdemoApp.zone.z1">Z 1</span></dt>
+                <dd>
+                    <span>{{ zone.z1 }}</span>
+                </dd>
+                <dt><span jhiTranslate="wmsdemoApp.zone.x2">X 2</span></dt>
+                <dd>
+                    <span>{{ zone.x2 }}</span>
+                </dd>
+                <dt><span jhiTranslate="wmsdemoApp.zone.y2">Y 2</span></dt>
+                <dd>
+                    <span>{{ zone.y2 }}</span>
+                </dd>
+                <dt><span jhiTranslate="wmsdemoApp.zone.z2">Z 2</span></dt>
+                <dd>
+                    <span>{{ zone.z2 }}</span>
+                </dd>
+                <dt><span jhiTranslate="wmsdemoApp.zone.associationZone">Association Zone</span></dt>
+                <dd>
+                    <span>{{ zone.associationZone }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/zone', zone.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

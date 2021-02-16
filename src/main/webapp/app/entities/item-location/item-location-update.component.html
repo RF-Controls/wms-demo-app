@@ -1,0 +1,120 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-item-location-heading" jhiTranslate="wmsdemoApp.itemLocation.home.createOrEditLabel">Create or edit a Item Location</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.itemLocation.lastLocationUpdate" for="field_lastLocationUpdate">Last Location Update</label>
+                    <div class="d-flex">
+                        <input id="field_lastLocationUpdate" type="datetime-local" class="form-control" name="lastLocationUpdate" formControlName="lastLocationUpdate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('lastLocationUpdate')!.invalid && (editForm.get('lastLocationUpdate')!.dirty || editForm.get('lastLocationUpdate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('lastLocationUpdate')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('lastLocationUpdate')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.itemLocation.zoneEnterInstant" for="field_zoneEnterInstant">Zone Enter Instant</label>
+                    <div class="d-flex">
+                        <input id="field_zoneEnterInstant" type="datetime-local" class="form-control" name="zoneEnterInstant" formControlName="zoneEnterInstant" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.itemLocation.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.itemLocation.x" for="field_x">X</label>
+                    <input type="number" class="form-control" name="x" id="field_x"
+                           formControlName="x"/>
+                    <div *ngIf="editForm.get('x')!.invalid && (editForm.get('x')!.dirty || editForm.get('x')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('x')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('x')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.itemLocation.y" for="field_y">Y</label>
+                    <input type="number" class="form-control" name="y" id="field_y"
+                           formControlName="y"/>
+                    <div *ngIf="editForm.get('y')!.invalid && (editForm.get('y')!.dirty || editForm.get('y')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('y')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('y')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.itemLocation.z" for="field_z">Z</label>
+                    <input type="number" class="form-control" name="z" id="field_z"
+                           formControlName="z"/>
+                    <div *ngIf="editForm.get('z')!.invalid && (editForm.get('z')!.dirty || editForm.get('z')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('z')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('z')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.itemLocation.item" for="field_item">Item</label>
+                    <select class="form-control" id="field_item" name="item" formControlName="itemId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="itemOption.id" *ngFor="let itemOption of items; trackBy: trackById">{{ itemOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="wmsdemoApp.itemLocation.zone" for="field_zone">Zone</label>
+                    <select class="form-control" id="field_zone" name="zone" formControlName="zoneId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="zoneOption.id" *ngFor="let zoneOption of zones; trackBy: trackById">{{ zoneOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

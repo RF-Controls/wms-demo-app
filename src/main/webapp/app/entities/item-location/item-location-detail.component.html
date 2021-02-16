@@ -1,0 +1,83 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div *ngIf="itemLocation">
+            <div class="row">
+                <div class="col-8">
+                    <h2><span
+                        jhiTranslate="wmsdemoApp.itemLocation.detail.title">Item Location</span> - {{ itemLocation.id }}
+                    </h2>
+                </div>
+            </div>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div *ngIf="itemLocation.detailImage">
+                            <img
+                                [src]="'data:' + itemLocation.detailImageContentType + ';base64,' + itemLocation.detailImage"
+                                style="max-width: 100%;" alt="item image"/>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <dl class="row">
+                        <dt class="col-sm-3"><span>Item Name</span></dt>
+                        <dd class="col-sm-9">
+                            <div *ngIf="itemLocation.itemId">
+                                <a [routerLink]="['/item', itemLocation.itemId, 'view']">{{ itemLocation.itemName }}</a>
+                            </div>
+                        </dd>
+                        <dt class="col-sm-3"><span>EPC</span></dt>
+                        <dd class="col-sm-9">
+                            <div *ngIf="itemLocation.itemId">
+                                <span>{{ itemLocation.epc }}</span>
+                            </div>
+                        </dd>
+                        <dt class="col-sm-3"><span>Last Update</span></dt>
+                        <dd class="col-sm-9">
+                            <span>{{ itemLocation.lastLocationUpdate | date:'medium' }}</span>
+                        </dd>
+                        <!-- <dt class="col-sm-3"><span>Zone Enter</span></dt>
+                         <dd class="col-sm-9">
+                             <span>{{ itemLocation.zoneEnterInstant | date:'medium' }}</span>
+                         </dd>-->
+                        <dt class="col-sm-3"><span jhiTranslate="wmsdemoApp.itemLocation.x">X</span></dt>
+                        <dd class="col-sm-9">
+                            <span>{{ itemLocation.x | number:'1.2-2' }}</span>
+                        </dd>
+                        <dt class="col-sm-3"><span jhiTranslate="wmsdemoApp.itemLocation.y">Y</span></dt>
+                        <dd class="col-sm-9">
+                            <span>{{ itemLocation.y | number:'1.2-2' }}</span>
+                        </dd>
+                        <dt class="col-sm-3"><span jhiTranslate="wmsdemoApp.itemLocation.z">Z</span></dt>
+                        <dd class="col-sm-9">
+                            <span>{{ itemLocation.z | number:'1.2-2' }}</span>
+                        </dd>
+                        <dt class="col-sm-3"><span jhiTranslate="wmsdemoApp.itemLocation.zone">Zone</span></dt>
+                        <dd class="col-sm-9">
+                            <div *ngIf="itemLocation.zoneId">
+                                <a [routerLink]="['/zone', itemLocation.zoneId, 'view']">{{ itemLocation.zoneName }}</a>
+                            </div>
+                        </dd>
+                    </dl>
+
+
+                    <button type="submit"
+                            (click)="previousState()"
+                            class="btn btn-info">
+                        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                    </button>
+
+                    <button type="button"
+                            [routerLink]="['/item-location', itemLocation.id, 'edit']"
+                            class="btn btn-primary">
+                        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

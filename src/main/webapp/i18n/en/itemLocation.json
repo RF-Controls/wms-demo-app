@@ -1,0 +1,30 @@
+{
+  "wmsdemoApp": {
+    "itemLocation": {
+      "home": {
+        "title": "Item Locations",
+        "createLabel": "Create a new Item Location",
+        "createOrEditLabel": "Create or edit a Item Location",
+        "search": "Search for Item Location",
+        "notFound": "No Item Locations found"
+      },
+      "created": "A new Item Location is created with identifier {{ param }}",
+      "updated": "A Item Location is updated with identifier {{ param }}",
+      "deleted": "A Item Location is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Item Location {{ id }}?"
+      },
+      "detail": {
+        "title": "Item Location"
+      },
+      "lastLocationUpdate": "Last Location Update",
+      "zoneEnterInstant": "Zone Enter Instant",
+      "description": "Description",
+      "x": "X",
+      "y": "Y",
+      "z": "Z",
+      "item": "Item",
+      "zone": "Zone"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+  ${AnsiColor.GREEN}██╗    ██╗███╗   ███╗███████╗ ${AnsiColor.RED}   ██████╗ ███████╗███╗   ███╗ ██████╗
+  ${AnsiColor.GREEN}██║    ██║████╗ ████║██╔════╝ ${AnsiColor.RED}   ██╔══██╗██╔════╝████╗ ████║██╔═══██╗
+  ${AnsiColor.GREEN}██║ █╗ ██║██╔████╔██║███████╗  ${AnsiColor.RED}  ██║  ██║█████╗  ██╔████╔██║██║   ██║
+  ${AnsiColor.GREEN}██║███╗██║██║╚██╔╝██║╚════██║  ${AnsiColor.RED}  ██║  ██║██╔══╝  ██║╚██╔╝██║██║   ██║
+  ${AnsiColor.GREEN}╚███╔███╔╝██║ ╚═╝ ██║███████║ ${AnsiColor.RED}   ██████╔╝███████╗██║ ╚═╝ ██║╚██████╔╝
+   ${AnsiColor.GREEN}╚══╝╚══╝ ╚═╝     ╚═╝╚══════╝ ${AnsiColor.RED}   ╚═════╝ ╚══════╝╚═╝     ╚═╝ ╚═════╝
+
+
+${AnsiColor.BRIGHT_BLUE}:: RF Controls 🤓  :: Running Spring Boot ${spring-boot.version} ::

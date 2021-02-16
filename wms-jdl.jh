@@ -1,0 +1,63 @@
+
+application {
+  config {
+    baseName wmsdemo,
+    applicationType monolith,
+    packageName com.rfcontrols.wms,
+    authenticationType jwt,
+    prodDatabaseType postgresql,
+    clientFramework angular,
+    clientTheme flatly,
+    testFrameworks [protractor],
+    websocket spring-websocket,
+    searchEngine elasticsearch,
+    cacheProvider ehcache
+  }
+  entities *
+}
+
+entity Zone {
+	name String required,
+	description String,
+    maxItems Integer,
+    x1 Double required,
+    y1 Double required,
+    z1 Double required,
+    x2 Double required,
+    y2 Double required,
+    z2 Double required,
+    associationZone Boolean required
+}
+
+entity Item {
+	name String required,
+    epc String required,
+    description String required,
+    description2 String,
+    weight Double,
+    thumbnail ImageBlob,
+    detailImage ImageBlob
+}
+
+entity ItemLocation{
+	lastLocationUpdate Instant required
+    zoneEnterInstant Instant,
+    description String,
+    x Double required,
+    y Double required,
+    z Double required
+}
+
+relationship OneToOne {
+  ItemLocation{item} to Item
+}
+
+relationship ManyToOne{
+	ItemLocation to Zone{epc}
+}
+
+service all with serviceImpl
+dto all with mapstruct
+paginate ItemLocation with pagination
+paginate Item with pagination
+paginate Zone with pagination

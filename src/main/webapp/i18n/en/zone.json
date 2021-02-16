@@ -1,0 +1,33 @@
+{
+  "wmsdemoApp": {
+    "zone": {
+      "home": {
+        "title": "Zones",
+        "createLabel": "Create a new Zone",
+        "createOrEditLabel": "Create or edit a Zone",
+        "search": "Search for Zone",
+        "notFound": "No Zones found"
+      },
+      "created": "A new Zone is created with identifier {{ param }}",
+      "updated": "A Zone is updated with identifier {{ param }}",
+      "deleted": "A Zone is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Zone {{ id }}?"
+      },
+      "detail": {
+        "title": "Zone"
+      },
+      "name": "Name",
+      "description": "Description",
+      "maxItems": "Max Items",
+      "x1": "X 1",
+      "y1": "Y 1",
+      "z1": "Z 1",
+      "x2": "X 2",
+      "y2": "Y 2",
+      "z2": "Z 2",
+      "associationZone": "Association Zone",
+      "epc": "Epc"
+    }
+  }
+}

@@ -1,0 +1,116 @@
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2><span jhiTranslate="wmsdemoApp.itemLocation.home.title">Item Locations</span></h2>
+        </div>
+
+        <div class="col-md-6">
+            <button id="jh-create-entity" class="btn btn-primary float-md-right jh-create-entity create-item-location"
+                    [routerLink]="['/item-location/new']">
+                <fa-icon icon="plus"></fa-icon>
+                <span class="hidden-sm-down" jhiTranslate="wmsdemoApp.itemLocation.home.createLabel">
+                    Create a new Item Location
+                    </span>
+            </button>
+        </div>
+    </div>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'wmsdemoApp.itemLocation.home.search' | translate }}">
+
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon icon="search"></fa-icon>
+                    </button>
+
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon icon="trash-alt"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="itemLocations?.length === 0">
+        <span jhiTranslate="wmsdemoApp.itemLocation.home.notFound">No itemLocations found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="itemLocations && itemLocations.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="itemId"><span jhiTranslate="wmsdemoApp.itemLocation.item">Item</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="zoneId"><span jhiTranslate="wmsdemoApp.itemLocation.zone">Zone</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="x"><span jhiTranslate="wmsdemoApp.itemLocation.x">X</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="y"><span jhiTranslate="wmsdemoApp.itemLocation.y">Y</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="z"><span jhiTranslate="wmsdemoApp.itemLocation.z">Z</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="description"><span jhiTranslate="wmsdemoApp.itemLocation.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastLocationUpdate"><span jhiTranslate="wmsdemoApp.itemLocation.lastLocationUpdate">Last Location Update</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="zoneEnterInstant"><span jhiTranslate="wmsdemoApp.itemLocation.zoneEnterInstant">Zone Enter Instant</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let itemLocation of itemLocations ;trackBy: trackId">
+                    <td><a [routerLink]="['/item-location', itemLocation.id, 'view']">{{ itemLocation.id }}</a></td>
+                    <td>
+                        <div *ngIf="itemLocation.itemId">
+                            <a [routerLink]="['/item', itemLocation.itemId , 'view']" >{{ itemLocation.itemName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="itemLocation.zoneId">
+                            <a [routerLink]="['/zone', itemLocation.zoneId , 'view']" >{{ itemLocation.zoneName }}</a>
+                        </div>
+                    </td>
+                    <td>{{ itemLocation.x | number:'1.2-2' }}</td>
+                    <td>{{ itemLocation.y | number:'1.2-2' }}</td>
+                    <td>{{ itemLocation.z | number:'1.2-2' }}</td>
+                    <td>{{ itemLocation.description }}</td>
+                    <td>{{ itemLocation.lastLocationUpdate | date:'medium' }}</td>
+                    <td>{{ itemLocation.zoneEnterInstant | date:'medium' }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/item-location', itemLocation.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/item-location', itemLocation.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(itemLocation)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="itemLocations && itemLocations.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>
