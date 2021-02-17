@@ -16,11 +16,19 @@ services:
       - wms_rfcos_pass=admin
     ports:
       - 8080:8080
+    depends_on: [wmsdemo-postgresql, wmsdemo-elasticsearch]
   wmsdemo-postgresql:
     extends:
       file: postgresql.yml
       service: wmsdemo-postgresql
+    volumes:
+      - wms-postgresdata:/var/lib/postgresql/data
   wmsdemo-elasticsearch:
     extends:
       file: elasticsearch.yml
       service: wmsdemo-elasticsearch
+    volumes:
+      - wms-elasicsearchdata:/usr/share/elasticsearch/data/
+volumes:
+  wms-postgresdata:
+  wms-elasicsearchdata:
