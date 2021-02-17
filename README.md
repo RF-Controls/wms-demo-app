@@ -63,7 +63,7 @@ This maven command will build to the local Docker daemon using Jib and Maven.
 This is handy for testing a complete build on a local docker instance
 
 ```
-mvn clean compile jib:dockerBuild
+mvn clean -Pprod compile jib:dockerBuild
 ```
 
 ### Using Angular CLI
@@ -102,8 +102,16 @@ Useful for building a docker container to install on another system
 
 ```
 
-mvn clean compile jib:buildTar
+mvn clean -Pprod compile jib:buildTar
 
+```
+
+To install the tarball on another system
+
+```
+
+docker load --input wmsdemo-image.tar
+docker-compose -f docker/app.yml up -d
 ```
 
 ### Packaging as jar

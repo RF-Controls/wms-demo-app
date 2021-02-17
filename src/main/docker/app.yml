@@ -21,14 +21,10 @@ services:
     extends:
       file: postgresql.yml
       service: wmsdemo-postgresql
-    volumes:
-      - wms-postgresdata:/var/lib/postgresql/data
   wmsdemo-elasticsearch:
     extends:
       file: elasticsearch.yml
       service: wmsdemo-elasticsearch
-    volumes:
-      - wms-elasicsearchdata:/usr/share/elasticsearch/data/
 volumes:
   wms-postgresdata:
   wms-elasicsearchdata:

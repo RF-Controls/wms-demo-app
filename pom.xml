@@ -704,6 +704,9 @@
                                 </permission>
                             </permissions>
                         </extraDirectories>
+                        <outputPaths>
+                            <tar>${project.build.directory}/wmsdemo-image.tar</tar>
+                        </outputPaths>
                     </configuration>
                 </plugin>
                 <plugin>

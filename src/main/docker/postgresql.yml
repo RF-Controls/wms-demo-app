@@ -2,8 +2,8 @@ version: '2'
 services:
   wmsdemo-postgresql:
     image: postgres:12.3
-    # volumes:
-    #     - ~/volumes/jhipster/wmsdemo/postgresql/:/var/lib/postgresql/data/
+    volumes:
+      - wms-postgresdata:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=wmsdemo
       - POSTGRES_PASSWORD=
