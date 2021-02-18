@@ -9,6 +9,11 @@ and demonstrations. The app allows you to do the following:
 - Search for the location of items by name (no memorizing EPC codes!)
 - Monitor the Item Location in real time
 
+#### Instructional Videos
+
+- [Installation Using Docker](https://youtu.be/Wo96cuTCbOE)
+- [How to use the application](https://youtu.be/qX9RwrW_N40)
+
 ### Some Notes
 
 - The default landing page of the app is located at this address: http://localhost:9000
